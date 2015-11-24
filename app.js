@@ -22,10 +22,11 @@ myApp.loseHealth = function(who) {
 
 myApp.fightMessages = function () {
   if ((myApp.wins == 4) || (myApp.loses == 4)) {
-    $("#message").attr("src", "http://cachemonet.com/src/center/finish.gif")
+    $("#message").attr("src", "http://cachemonet.com/src/center/finish.gif");
   };
   if ((myApp.wins >= 5) || (myApp.loses >= 5)) {
-    $("#message").attr("src", "http://vignette1.wikia.nocookie.net/mkwikia/images/8/89/Fatality.png/revision/20120127115303")
+    $("#message").attr("src", "http://vignette1.wikia.nocookie.net/mkwikia/images/8/89/Fatality.png/revision/20120127115303");
+    $("#rematch").removeClass("hidden");
   };
 };
 
@@ -163,7 +164,9 @@ myApp.winner = function(playerMove, computerMove) {
   $("#lizard").click(function(){myApp.makeMove(lizard.id)});
   $("#spock").click(function(){myApp.makeMove(spock.id)});
 
-  $("#message").attr("src", "http://www.jtresca.com/test/FinishHim_Gif.gif")
+  $('#rematch').click(function() {
+      location.reload();
+  });
 
 })();
 
