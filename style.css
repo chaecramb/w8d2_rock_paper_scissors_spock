@@ -1,0 +1,38 @@
+h3 {
+  display: inline;
+  text-align: center;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  display: inline;
+}
+
+body {
+  text-align: center;
+  padding: 80px;
+}
+
+div {
+  display: inline-block;
+}
+
+#message {
+  height: 200px;
+  width: auto;
+}
+
+#vs {
+  margin: 40px;
+}
+
+#p1,#p2,#p3,#p4,#p5,#c1,#c2,#c3,#c4,#c5 {
+  background-color: red;
+  height: 10px;
+  width: 10px;
+  margin-left: 5px;
+  display: inline-block;
+}

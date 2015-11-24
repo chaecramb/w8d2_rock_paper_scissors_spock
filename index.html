@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rock, paper, scissors, lizard, spock</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+</head>
+<body>
+
+<div>
+  <h3 id="player-heading">Player</h3>
+  <ul id="player-health">
+    <li></li>
+    <li><div id="p1"></div></li>
+    <li><div id="p2"></div></li>
+    <li><div id="p3"></div></li>
+    <li><div id="p4"></div></li>
+    <li><div id="p5"></div></li>
+  </ul>
+</div>
+
+<h3 id="vs">vs.</h3>
+
+<div>
+  <h3 id="computer-heading">Computer</h3>
+  <ul id="computer-health">
+    <li></li>
+    <li><div id="c1"></div></li>
+    <li><div id="c2"></div></li>
+    <li><div id="c3"></div></li>
+    <li><div id="c4"></div></li>
+    <li><div id="c5"></div></li>
+  </ul>
+</div>
+
+
+  <ul>
+    <li><button id="rock">Rock</button></li>
+    <li><button id="paper">Paper</button></li>
+    <li><button id="scissors">Scissors</button></li>
+    <li><button id="lizard">Lizard</button></li>
+    <li><button id="spock">Spock</button></li>
+  </ul>
+
+  <p>Wins: <span id="wins"></span></p>
+  <p>Loses: <span id="loses"></span></p>
+  <p id="moves"></p>
+  <p id="result"></p>
+  <img id="message" src="">
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
