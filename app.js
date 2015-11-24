@@ -14,9 +14,9 @@ myApp.computerMove = function() {
 
 myApp.loseHealth = function(who) {
   if (who == "computer") {
-    $('#computer-health li:last-child').remove();
+    $('#computer-health li:nth-child('+(6-myApp.wins)+') div').attr('style', 'background-color:red');
   } else if (who == "player") {
-    $('#player-health li:last-child').remove();
+    $('#player-health li:nth-child('+(6-myApp.loses)+') div').attr('style', 'background-color:red');
   }
 };
 
