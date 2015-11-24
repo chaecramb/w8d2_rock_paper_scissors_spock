@@ -26,8 +26,12 @@ myApp.fightMessages = function () {
   };
   if ((myApp.wins >= 5) || (myApp.loses >= 5)) {
     $("#message").attr("src", "http://vignette1.wikia.nocookie.net/mkwikia/images/8/89/Fatality.png/revision/20120127115303");
-    $("#rematch").removeClass("hidden");
   };
+};
+
+myApp.gameOver = function() {
+  $("#rematch").removeClass("hidden");
+  $(".moves").addClass("hidden");  
 };
 
 myApp.makeMove = function(playerMove) {
@@ -38,120 +42,73 @@ myApp.makeMove = function(playerMove) {
   $("#moves").append(playerMove);
   $("#moves").append(" vs ");
   $("#moves").append(computerMove);
+
+
   $("#result").append(myApp.winner(playerMove, computerMove));
   $("#wins").text(myApp.wins);
   $("#loses").text(myApp.loses);
 
   myApp.fightMessages();
+
+  if ((myApp.wins >= 5) || (myApp.loses >= 5)) {
+    myApp.gameOver();
+  };
+};
+
+myApp.win = function() {
+  myApp.wins += 1;
+  myApp.loseHealth("computer");
+  return "You win!";  
+};
+
+myApp.lose = function() {
+  myApp.loses += 1;
+  myApp.loseHealth("player");
+  return "You lose!"; 
 };
 
 myApp.winner = function(playerMove, computerMove) {
-  switch (playerMove) {
-    case "rock":
-        if (computerMove === "rock") {
-          return "Draw!"
-        } else if (computerMove === "paper") {
-          myApp.loses += 1;
-          myApp.loseHealth("player");
-          return "You lose!"
-        } else if (computerMove === "scissors") {
-          myApp.wins += 1;
-          myApp.loseHealth("computer");
-          return "You win!"      
-        } else if (computerMove === "lizard") {
-          myApp.wins += 1;
-          myApp.loseHealth("computer");
-          return "You win!"    
-        } else if (computerMove === "spock") {
-          myApp.loses += 1;
-          myApp.loseHealth("player");
-          return "You lose!" 
+
+  if (playerMove === computerMove) {
+    return "Draw!"
+  } else {
+    switch (playerMove) {
+      case "rock":
+          if ((computerMove === "paper") || (computerMove === "spock")) {
+            return myApp.lose();  
+          } else {
+            return myApp.win();      
+          }; 
+        break;
+      case "paper":
+        if ((computerMove === "rock") || (computerMove === "spock")) {
+          return myApp.win(); 
+        } else {
+          return myApp.lose();  
         };
-      break;
-    case "paper":
-      if (computerMove === "rock") {
-        myApp.wins += 1;
-        myApp.loseHealth("computer");
-        return "You win!" 
-      } else if (computerMove === "paper") {
-        return "Draw!"
-      } else if (computerMove === "scissors") {
-        myApp.loses += 1;
-        myApp.loseHealth("player");
-        return "You lose!"
-      } else if (computerMove === "lizard") {
-        myApp.loses += 1;
-        myApp.loseHealth("player");
-        return "You lose!"
-      } else if (computerMove === "spock") {
-        myApp.wins += 1;
-        myApp.loseHealth("computer");
-        return "You win!" 
-      };
-      break;
-    case "scissors":
-      if (computerMove === "rock") {
-        myApp.loses += 1;
-        myApp.loseHealth("player");
-        return "You lose!"
-      } else if (computerMove === "paper") {
-        myApp.wins += 1;
-        myApp.loseHealth("computer");
-        return "You win!"
-      } else if (computerMove === "scissors") {
-        return "Draw!"
-      } else if (computerMove === "lizard") {
-        myApp.wins += 1;
-        myApp.loseHealth("computer");
-        return "You win!"
-      } else if (computerMove === "spock") {
-        myApp.loses += 1;
-        myApp.loseHealth("player");
-        return "You lose!"
-      };
-      break;
-    case "lizard":
-      if (computerMove === "rock") {
-        myApp.loses += 1;
-        myApp.loseHealth("player");
-        return "You lose!"
-      } else if (computerMove === "paper") {
-        myApp.wins += 1;
-        myApp.loseHealth("computer");
-        return "You win!"
-      } else if (computerMove === "scissors") {
-        myApp.loses += 1;
-        myApp.loseHealth("player");
-        return "You lose!"
-      } else if (computerMove === "lizard") {
-        return "Draw!"
-      } else if (computerMove === "spock") {
-        myApp.wins += 1;
-        myApp.loseHealth("computer");
-        return "You win!"
-      };
-      break;
-    case "spock":
-      if (computerMove === "rock") {
-        myApp.wins += 1;
-        myApp.loseHealth("computer");
-        return "You win!"
-      } else if (computerMove === "paper") {
-        myApp.loses += 1;
-        myApp.loseHealth("player");
-        return "You lose!"
-      } else if (computerMove === "scissors") {
-        myApp.wins += 1;
-        myApp.loseHealth("computer");
-        return "You win!"
-      } else if (computerMove === "lizard") {
-        myApp.loses += 1;
-        myApp.loseHealth("player");
-        return "You lose!"
-      } else if (computerMove === "spock") {
-        return "Draw!"
-      };
-      break;
+        break;
+      case "scissors":
+        if ((computerMove === "rock") || (computerMove === "spock")) {
+          return myApp.lose();  
+        } else {
+           return myApp.win();
+        };
+        break;
+      case "lizard":
+        if ((computerMove === "rock") || (computerMove === "scissors")) {
+          return myApp.lose();  
+        } else {
+          return myApp.win();
+        };
+        break;
+      case "spock":
+        if ((computerMove === "rock") || (computerMove === "scissors")) {
+          return myApp.win();
+        } else {
+          return myApp.lose();  
+        };
+        break;
+    };
   };
 };
 
@@ -170,11 +127,3 @@ myApp.winner = function(playerMove, computerMove) {
 
 })();
 
-
-loseHealth = function(who) {
-  if (who == "computer") {
-    $('#computer-health li:last-child').remove();
-  } else if (who == "player") {
-    $('#player-health li:last-child').remove();
-  }
-}
